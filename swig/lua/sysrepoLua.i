@@ -5,10 +5,10 @@
 
 %{
 /* Includes the header in the wrapper code */
-#include "sysrepo.h"
+#include "inc/sysrepo.h"
 
-%} 
+%}
 
 /* Parse the header file to generate wrappers */
-%include "../inc/sysrepo.h"
+%include "inc/sysrepo.h"
 
