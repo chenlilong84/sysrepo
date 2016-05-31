@@ -261,6 +261,10 @@ Subscribe::Subscribe(Session *sess)
 {
     _sub = NULL;
     _sess = sess;
+    #ifndef SWIG
+    swig_sub = _sub;
+    swig_sess = _sess;
+    #endif
 }
 
 Subscribe::~Subscribe()

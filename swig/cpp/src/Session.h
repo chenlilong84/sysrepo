@@ -58,6 +58,10 @@ public:
     void module_change_subscribe(const char *module_name, bool enable_running, \
 		                 sr_module_change_cb callback, void *private_ctx);
     ~Subscribe();
+    #ifndef SWIG
+        sr_subscription_ctx_t *swig_sub;
+        Session *swig_sess;
+    #endif
 
 private:
     sr_subscription_ctx_t *_sub;
