@@ -39,6 +39,11 @@ static void global_cb(sr_session_ctx_t *session, const char *module_name, void *
     ctx->send_to_lua(session, module_name, ctx->private_ctx);
 }
 
+static void lua_sleep(int m)
+{
+    usleep(m * 1000);
+}
+
 %}
 
 %extend Subscribe {
