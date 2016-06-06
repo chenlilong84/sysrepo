@@ -1,5 +1,7 @@
 %module libsysrepoLua51
 
+%include <stdint.i>
+
 %{
     extern "C" {
         #include "../inc/sysrepo.h"
@@ -65,5 +67,14 @@ void module_change_subscribe_lua(const char *module_name, Wrap_cb *class_ctx, vo
         }
     };
 };
+
+%ignore Value::Value(double decimal64_val, sr_type_t type = SR_DECIMAL64_T);
+%ignore Value::Value(int8_t int8_val, sr_type_t type = SR_INT16_T);
+%ignore Value::Value(int16_t int16_val, sr_type_t type = SR_INT16_T);
+%ignore Value::Value(int32_t int32_val, sr_type_t type = SR_INT32_T);
+%ignore Value::Value(uint8_t uint8_val, sr_type_t type = SR_UINT8_T);
+%ignore Value::Value(uint16_t uint16_val, sr_type_t type = SR_UINT16_T);
+%ignore Value::Value(uint32_t uint32_val, sr_type_t type = SR_UINT32_T);
+%ignore Value::Value(uint64_t uint64_val, sr_type_t type = SR_UINT64_T);
 
 %include "../swig_base/base.i"

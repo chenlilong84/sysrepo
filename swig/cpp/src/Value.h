@@ -49,8 +49,6 @@ public:
     Value(uint32_t uint32_val, sr_type_t type = SR_UINT32_T);
     Value(uint64_t uint64_val, sr_type_t type = SR_UINT64_T);
 
-    // TODO for swig int casting
-    //Value(sr_type_t type = SR_UINT64_T, uint64_t uint64_val);
     sr_val_t **Get();
     ~Value();
     void Set(sr_val_t *val = NULL);

@@ -291,9 +291,26 @@ Value::Value(int64_t int64_val, sr_type_t type)
     val = (sr_val_t*) calloc(1, sizeof(sr_val_t));
     if (val == NULL)
         throw_exception(SR_ERR_NOMEM);
-    if (type == SR_INT64_T) {
-	val->data.int64_val = int64_val;
+    if (type == SR_DECIMAL64_T) {
+	val->data.uint64_val = (double) int64_val;
+    } else if (type == SR_UINT64_T) {
+        val->data.uint64_val = (uint64_t) int64_val;
+    } else if (type == SR_UINT32_T) {
+        val->data.uint32_val = (uint32_t) int64_val;
+    } else if (type == SR_UINT16_T) {
+        val->data.uint16_val = (uint16_t) int64_val;
+    } else if (type == SR_UINT8_T) {
+        val->data.uint8_val = (uint8_t) int64_val;
+    } else if (type == SR_INT64_T) {
+        val->data.int64_val = (int64_t) int64_val;
+    } else if (type == SR_INT32_T) {
+        val->data.int32_val = (int32_t) int64_val;
+    } else if (type == SR_INT16_T) {
+        val->data.int16_val = (int16_t) int64_val;
+    } else if (type == SR_INT8_T) {
+        val->data.int8_val = (int8_t) int64_val;
     } else {
+	    printf("\nERROR \n\n\n\n");
         free(val);
         throw_exception(SR_ERR_INVAL_ARG);
     }
