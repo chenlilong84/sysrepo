@@ -45,7 +45,7 @@ function print_current_config(sess)
 
 end
 
-function module_change_cb(session, module_name, private_ctx)
+function module_change_cb(session, module_name, event, private_ctx)
     print("\n\n ========== CONFIG HAS CHANGED, CURRENT RUNNING CONFIG: ==========\n");
 
     sess = sys.Session(session)
@@ -63,7 +63,7 @@ function run()
 
     fn = sys.Wrap_cb(module_change_cb)
 
-    subscribe:module_change_subscribe_lua("ietf-interfaces", true, fn, nil);
+    subscribe:module_change_subscribe_lua("ietf-interfaces", fn);
 
     print("\n\n ========== STARTUP CONFIG APPLIED AS RUNNING ==========\n");
 

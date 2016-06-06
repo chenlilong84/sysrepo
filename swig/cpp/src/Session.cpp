@@ -283,13 +283,12 @@ sr_session_ctx_t *Session::Get()
     return _sess;
 }
 
-void Subscribe::module_change_subscribe(const char *module_name, bool enable_running, \
-		                        sr_module_change_cb callback, void *private_ctx)
+void Subscribe::module_change_subscribe(const char *module_name, sr_module_change_cb callback, \
+                                        void *private_ctx, uint32_t priority, sr_subscr_options_t opts)
 {
     int ret = 0;
 
-    ret = sr_module_change_subscribe(_sess->Get(), module_name, enable_running, callback, \
-		                     private_ctx, &_sub);
+    ret = sr_module_change_subscribe(_sess->Get(), module_name, callback, private_ctx, priority, opts, &_sub);
     if (SR_ERR_OK != ret) {
         throw_exception(ret);
     }

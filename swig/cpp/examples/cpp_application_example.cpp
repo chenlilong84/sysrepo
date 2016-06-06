@@ -90,13 +90,16 @@ print_current_config(Session *session)
     }
 }
 
-static void
-module_change_cb(sr_session_ctx_t *session, const char *module_name, void *private_ctx)
+static int
+module_change_cb(sr_session_ctx_t *session, const char *module_name, sr_notif_event_t event, \
+                 void *private_ctx)
 {
     cout << "\n\n ========== CONFIG HAS CHANGED, CURRENT RUNNING CONFIG: ==========\n" << endl;
 
     Session sess(session);
     print_current_config(&sess);
+
+    return SR_ERR_OK;
 }
 
 static void
@@ -119,7 +122,7 @@ main(int argc, char **argv)
 
         Subscribe subscribe(&sess);
 
-	subscribe.module_change_subscribe("ietf-interfaces", true, module_change_cb, NULL);
+	subscribe.module_change_subscribe("ietf-interfaces", module_change_cb);
 
         cout << "\n\n ========== STARTUP CONFIG APPLIED AS RUNNING ==========\n" << endl;
 

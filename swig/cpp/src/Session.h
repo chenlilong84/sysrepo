@@ -55,8 +55,9 @@ class Subscribe:public Throw_Exception
 
 public:
     Subscribe(Session *sess);
-    void module_change_subscribe(const char *module_name, bool enable_running, \
-		                 sr_module_change_cb callback, void *private_ctx);
+
+    void module_change_subscribe(const char *module_name, sr_module_change_cb callback, void *private_ctx = NULL, \
+                                 uint32_t priority = 0, sr_subscr_options_t opts = SR_SUBSCR_DEFAULT);
     ~Subscribe();
     #ifndef SWIG
         sr_subscription_ctx_t *swig_sub;
