@@ -67,9 +67,7 @@ function run()
 
     print("\n\n ========== STARTUP CONFIG APPLIED AS RUNNING ==========\n");
 
-    while true do
-        sys.lua_sleep(1000)
-    end
+    sys.global_loop()
 
     print("Application exit requested, exiting.\n");
 end

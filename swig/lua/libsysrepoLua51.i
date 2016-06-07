@@ -17,6 +17,7 @@
 %inline %{
 #include <unistd.h>
 #include "../inc/sysrepo.h"
+#include <signal.h>
 
 class Wrap_cb {
 public:
@@ -47,9 +48,22 @@ static int global_cb(sr_session_ctx_t *session, const char *module_name, sr_noti
     return SR_ERR_OK;
 }
 
-static void lua_sleep(int m)
+
+volatile int exit_application = 0;
+
+static void
+sigint_handler(int signum)
 {
-    usleep(m * 1000);
+    exit_application = 1;
+}
+
+
+static void global_loop() {
+    /* loop until ctrl-c is pressed / SIGINT is received */
+    signal(SIGINT, sigint_handler);
+    while (!exit_application) {
+        sleep(1000);  /* or do some more useful work... */
+    }
 }
 
 %}
